@@ -2,3 +2,8 @@
 build
 *.exe
 *.o
+
+lib
+
+include/image/MVSDK/*.h
+include/image/MVSDK/*.hpp
