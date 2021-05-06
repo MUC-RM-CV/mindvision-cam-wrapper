@@ -63,6 +63,20 @@ bool CameraInput::init()
          CameraSetGamma、CameraSetConrast、CameraSetGain等设置图像伽马、对比度、RGB数字增益等等。
          更多的参数的设置方法，，清参考MindVision_Demo。本例程只是为了演示如何将SDK中获取的图像，转成OpenCV的图像格式,以便调用OpenCV的图像处理函数进行后续开发
     */
+    //printf("iFrameSpeedDesc = %d\n",tCapability.iFrameSpeedDesc);         //frame rate option number,when set,iframeSpeed range (0,iFrameSpeedDec-1)
+    //CameraSetFrameSpeed(hCamera, 2);          //set frame rate,the bigger,the quicker(0~2)
+    //CameraSetAnalogGain(hCamera, 4);           //mo ni zeng yi
+    //int analoggain;
+    //CameraGetAnalogGain(hCamera, &analoggain);
+    //std::cout << "analoggain = " << analoggain << std::endl;
+    //CameraSetAeState(hCamera, false);             //设置为手动曝光
+    //if (CameraSetExposureTime(hCamera, 1000) == 0) //单位为微秒
+    //    std::cout << "set exposure successful!\n";
+    //else
+    //    std::cout << "set exposure failed!\n";
+    //double expTime = 0;
+    //CameraGetExposureTime(hCamera, &expTime);
+    //std::cout << "explore time = " << expTime << "us" << std::endl;
     
     this->opened = true;
     return true;
@@ -87,7 +101,7 @@ cv::Mat CameraInput::read()
 
 #if defined(WIN32)
             // 由于SDK输出的数据默认是从底到顶的，转换为Opencv图片需要做一下垂直镜像
-            CameraFlipFrameBuffer(g_pRgbBuffer, &sFrameInfo, 2);
+            CameraFlipFrameBuffer(g_pRgbBuffer, &sFrameInfo, 1);
 #endif
 
             matImg = cv::Mat(
