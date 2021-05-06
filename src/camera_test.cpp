@@ -7,7 +7,7 @@ int main() {
 
     if (!(cam->is_opened())) return 0;
 
-    cv::namedWindow("Minvision Camera", cv::WINDOW_NORMAL);
+    cv::namedWindow("Mindvision Camera", cv::WINDOW_NORMAL);
 
     cv::Size frame_size = cam->read().size();
     cv::Rect center(

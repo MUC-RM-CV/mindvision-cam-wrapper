@@ -11,10 +11,12 @@ bool CameraInput::init()
     int                     iCameraCounts = 1; // 摄像头数量
     int                     iStatus = -1;      // 相机初始化返回值
     tSdkCameraCapbility     tCapability;       // 设备描述信息
+    int                     nChannel = 3;
 
     CameraSdkInit(1);
 
     //枚举设备，并建立设备列表
+    //如果需要连接多个设备，则将tCameraEnumList改为数组，同时修改iCameraCounts的值
     CameraEnumerateDevice(&tCameraEnumList, &iCameraCounts);
 
     //没有连接设备
@@ -39,8 +41,16 @@ bool CameraInput::init()
     //获得相机的特性描述结构体。该结构体中包含了相机可设置的各种参数的范围信息。决定了相关函数的参数
     CameraGetCapability(hCamera, &tCapability);
 
+    if (tCapability.sIspCapacity.bMonoSensor) {
+        nChannel = 1;
+        CameraSetIspOutFormat(hCamera,CAMERA_MEDIA_TYPE_MONO8);
+    } else {
+        nChannel = 3;
+        CameraSetIspOutFormat(hCamera,CAMERA_MEDIA_TYPE_BGR8);
+    }
+
     // 分配图像缓冲区
-    g_pRgbBuffer =  new UCHAR[tCapability.sResolutionRange.iHeightMax * tCapability.sResolutionRange.iWidthMax * 3]; 
+    g_pRgbBuffer =  new unsigned char[tCapability.sResolutionRange.iHeightMax * tCapability.sResolutionRange.iWidthMax * nChannel]; 
 
     /*让SDK进入工作模式，开始接收来自相机发送的图像
     数据。如果当前相机是触发模式，则需要接收到
@@ -75,8 +85,10 @@ cv::Mat CameraInput::read()
 
         if (status == CAMERA_STATUS_SUCCESS) {
 
+#if defined(WIN32)
             // 由于SDK输出的数据默认是从底到顶的，转换为Opencv图片需要做一下垂直镜像
             CameraFlipFrameBuffer(g_pRgbBuffer, &sFrameInfo, 2);
+#endif
 
             matImg = cv::Mat(
                 cv::Size(sFrameInfo.iWidth, sFrameInfo.iHeight),
@@ -84,11 +96,11 @@ cv::Mat CameraInput::read()
                 g_pRgbBuffer
             );
 
-            double resize_t = cv::getTickCount();
+            double resize_time = cv::getTickCount();
 
             //cv::resize(matImage, matImage, img_res);
 
-            resize_t = ((double)cv::getTickCount() - resize_t) / cv::getTickFrequency();
+            resize_time = ((double)cv::getTickCount() - resize_time) / cv::getTickFrequency();
         }
 
         //在成功调用CameraGetImageBuffer后，必须调用CameraReleaseImageBuffer来释放获得的buffer。
