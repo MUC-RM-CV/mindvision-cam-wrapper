@@ -7,7 +7,7 @@ int main() {
 
     if (!(cam->is_opened())) return 0;
 
-    cv::namedWindow("Mindvision Camera", cv::WINDOW_NORMAL);
+    std::string windowTitle = "Mindvision Camera";
 
     cv::Size frame_size = cam->read().size();
     cv::Rect center(
@@ -23,7 +23,7 @@ int main() {
         frame = cam->read();
         if (!frame.empty()) {
             cv::rectangle(frame, center, cv::Scalar(0,255,0));
-            cv::imshow("cam", frame);
+            cv::imshow(windowTitle, frame);
         } else {
             std::cerr << "no img!\n";
         }

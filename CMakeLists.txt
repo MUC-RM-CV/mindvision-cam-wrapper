@@ -15,7 +15,16 @@ add_executable(camera_test
     src/image/CameraInput.cpp
 )
 
+if (WIN32)
 target_link_libraries(camera_test 
     ${OpenCV_LIBS} 
-    MVSDK
+    ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
 )
+endif(WIN32)
+
+if (LINUX)
+target_link_libraries(camera_test 
+    ${OpenCV_LIBS} 
+    MVCAMSDK
+)
+endif(LINUX)

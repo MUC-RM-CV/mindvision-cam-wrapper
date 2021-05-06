@@ -1,5 +1,5 @@
 
-Mindvision 迈德威视 工业摄像头 SDK 读取图像 API 封装
+对 Mindvision 迈德威视 工业摄像头 SDK 图像读取 API 的 OpenCV C++ 封装
 
 迈德威视 SDK 请在官网自行下载安装。官网：[mindvision.com.cn](https://mindvision.com.cn)
 
@@ -16,7 +16,7 @@ Mindvision 迈德威视 工业摄像头 SDK 读取图像 API 封装
 
 - Windows SDK 安装后，Mindvision 的工业摄像头似乎可以直接作为 USB Camera 使用（未验证），也就是说，使用`cv::VideoCapture`即可调用工业摄像头；但是Linux下貌似不能成功
 
-- 在 x86_64 Windows 上，似乎需要调用 MVSDK 中的 `CameraFlipFrameBuffer` 来对获取的图像进行反转，但是在 Nvidia TX2 （MVSDK for Linux）上则似乎不需要对图像进行反转；
+- 在 x86_64 Windows 上，似乎需要调用 MVSDK 中的 `CameraFlipFrameBuffer` 来对获取的图像进行镜像反转，但是在 Nvidia TX2 （MVSDK for Linux）上则似乎不需要进行翻转操作；
 - 如果没有使用`CameraSetIspOutFormat`，则可能会遇到色彩错乱的问题
 
 x86_64: Windows + MSYS2 MinGW64 + OpenCV 4.5.1 + CMake 测试通过
