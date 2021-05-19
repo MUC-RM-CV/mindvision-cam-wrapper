@@ -112,7 +112,7 @@ cv::Mat CameraInput::read()
 
             double resize_time = cv::getTickCount();
 
-            //cv::resize(matImage, matImage, img_res);
+            cv::resize(matImg, matImg, this->imgResolution);
 
             resize_time = ((double)cv::getTickCount() - resize_time) / cv::getTickFrequency();
         }

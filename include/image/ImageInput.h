@@ -6,18 +6,22 @@
 class ImageInput
 {
 protected:
-    cv::Size imgRes = cv::Size(640,480);
+    cv::Size imgResolution;
+    bool opened;
 public:
-    ImageInput() {}
+    ImageInput(cv::Size res = cv::Size(640,480)) : imgResolution(res) {}
+    
     virtual ~ImageInput() = default;
 
-    virtual bool        init()          = 0;
-    virtual cv::Mat     read()          = 0;
-    virtual bool        is_opened()     = 0;
-    virtual             operator bool() = 0;
+    virtual bool        init() = 0;
+    virtual cv::Mat     read() = 0;
 
-    void set_res(int cols, int rows)    { imgRes = cv::Size(cols, rows); }
-    void set_res(const cv::Size & _res) { imgRes = _res; }
+    ImageInput&         operator>>(cv::Mat& image)  { image = this->read(); return *this; }
+    bool                isOpened()                  { return opened; }
+    operator            bool()                      { return opened; }
+
+    void setResolution(int width, int height) { imgResolution = cv::Size(width, height); }
+    void setResolution(const cv::Size & _res) { imgResolution = _res; }
 };
 
 #endif 

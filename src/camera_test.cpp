@@ -3,13 +3,17 @@
 #include <iostream>
 
 int main() {
-    cv::Ptr<ImageInput> cam = new CameraInput();
+    //cv::Ptr<ImageInput> cam = new CameraInput();
 
-    if (!(cam->is_opened())) return 0;
+    CameraInput cam;
 
-    std::string windowTitle = "Mindvision Camera";
+    if (!(cam.isOpened())) return 0;
 
-    cv::Size frame_size = cam->read().size();
+    cv::Mat frame;
+
+    cam >> frame;
+
+    cv::Size frame_size = frame.size();
     cv::Rect center(
         frame_size.width / 2 - frame_size.width * 0.1,
         frame_size.height / 2 - frame_size.height * 0.1, 
@@ -17,10 +21,11 @@ int main() {
         frame_size.height * 0.2
     );
 
-    cv::Mat frame;
+    cv::String windowTitle = "Mindvision Camera";
+    cv::namedWindow(windowTitle);
 
     while(true) {
-        frame = cam->read();
+        cam >> frame;
         if (!frame.empty()) {
             cv::rectangle(frame, center, cv::Scalar(0,255,0));
             cv::imshow(windowTitle, frame);
