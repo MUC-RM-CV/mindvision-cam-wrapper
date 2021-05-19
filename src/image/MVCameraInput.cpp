@@ -1,11 +1,11 @@
 #include "image/CameraInput.h"
 
-CameraInput::CameraInput()
+MVCameraInput::MVCameraInput()
 {
     this->init();
 }
 
-bool CameraInput::init()
+bool MVCameraInput::init()
 {
     tSdkCameraDevInfo       tCameraEnumList;   // 相机列表
     int                     iCameraCounts = 1; // 摄像头数量
@@ -82,7 +82,7 @@ bool CameraInput::init()
     return true;
 }
 
-cv::Mat CameraInput::read()
+cv::Mat MVCameraInput::read()
 {
     tSdkFrameHead           sFrameInfo;        //输入图像的帧头信息
     BYTE*                   pbyBuffer;         //输出图像数据的缓冲区地址
@@ -127,7 +127,7 @@ cv::Mat CameraInput::read()
     return matImg;
 }
 
-CameraInput::~CameraInput()
+MVCameraInput::~MVCameraInput()
 {
     CameraUnInit(hCamera);
     //注意，先反初始化后再释放图像缓冲区

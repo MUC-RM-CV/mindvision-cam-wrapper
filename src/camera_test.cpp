@@ -3,9 +3,9 @@
 #include <iostream>
 
 int main() {
-    //cv::Ptr<ImageInput> cam = new CameraInput();
+    //cv::Ptr<ImageInput> cam = new MVCameraInput();
 
-    CameraInput cam;
+    MVCameraInput cam;
 
     if (!(cam.isOpened())) return 0;
 

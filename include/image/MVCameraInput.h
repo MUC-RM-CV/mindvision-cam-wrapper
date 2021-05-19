@@ -8,17 +8,17 @@
 #include <iostream>
 #include <string>
 
-class CameraInput : public ImageInput {
+class MVCameraInput : public ImageInput {
 private:
     unsigned char*          g_pRgbBuffer = nullptr; // 处理后图像输出的数据缓存区地址
     CameraHandle            hCamera;                // 相机句柄
 
 public:
-    CameraInput();
+    MVCameraInput();
     bool        init()      final;
     cv::Mat     read()      final;
 
-    ~CameraInput();
+    ~MVCameraInput();
 };
 
 #endif 
