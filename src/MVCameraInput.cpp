@@ -56,6 +56,7 @@ bool MVCameraInput::init()
     数据。如果当前相机是触发模式，则需要接收到
     触发帧以后才会更新图像。    */
     CameraPlay(hCamera);
+    CameraSetExposureTime(hCamera, 10000);
 
     /*其他的相机参数设置
     例如 CameraSetExposureTime   CameraGetExposureTime  设置/读取曝光时间

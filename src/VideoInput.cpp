@@ -42,7 +42,7 @@ bool VideoInput::initUSBCamera()
     }
 }
 
-cv::Mat VideoInput::read(cv::Mat& input)
+cv::Mat VideoInput::read()
 {
     origin >> tmp;
     cv::resize(tmp, tmp, imgResolution);

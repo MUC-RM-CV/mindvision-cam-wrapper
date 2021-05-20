@@ -22,6 +22,7 @@ public:
 
     void setResolution(int width, int height) { imgResolution = cv::Size(width, height); }
     void setResolution(const cv::Size & _res) { imgResolution = _res; }
+    auto getResolution() { return imgResolution; }
 };
 
 #endif 

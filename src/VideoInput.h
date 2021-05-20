@@ -10,7 +10,7 @@ class VideoInput : public ImageInput {
 private:
     cv::Mat tmp;
     cv::VideoCapture origin;
-    void initUSBCamera();
+    bool initUSBCamera();
 
 public:
     VideoInput();
