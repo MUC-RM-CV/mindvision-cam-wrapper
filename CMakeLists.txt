@@ -13,18 +13,31 @@ include_directories(./src)
 include_directories(./3rdparty)
 
 add_executable(camera_test 
-    src/camera_test.cpp 
-    src/image/MVCameraInput.cpp
+    src/demo/camera_test.cpp 
+    src/MVCameraInput.cpp
 )
+
+# add_executable(windmill 
+#     src/windmill.cpp 
+#     src/image/MVCameraInput.cpp
+# )
 
 if(WIN32)
     target_link_libraries(camera_test 
         ${OpenCV_LIBS} 
         ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
     )
+    # target_link_libraries(windmill 
+    #     ${OpenCV_LIBS} 
+    #     ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
+    # )
 elseif(UNIX)
     target_link_libraries(camera_test 
         ${OpenCV_LIBS} 
         MVSDK
     )
+    # target_link_libraries(windmill 
+    #     ${OpenCV_LIBS} 
+    #     MVSDK
+    # )
 endif()

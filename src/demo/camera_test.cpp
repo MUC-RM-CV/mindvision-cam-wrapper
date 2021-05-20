@@ -1,5 +1,5 @@
 #include <opencv2/opencv.hpp>
-#include "image/MVCameraInput.h"
+#include "MVCameraInput.h"
 #include <iostream>
 
 int main() {
