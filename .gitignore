@@ -4,7 +4,3 @@ build
 *.o
 
 lib
-
-3rdparty/MVSDK/include/*.h
-3rdparty/MVSDK/include/*.hpp
-3rdparty/MVSDK/lib/

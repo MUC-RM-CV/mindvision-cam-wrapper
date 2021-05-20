@@ -1,0 +1,6 @@
+# MVSDK: Headers
+include/*.h
+include/*.hpp
+
+# MVSDK: libs
+/lib/
