@@ -9,12 +9,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenCV REQUIRED)
 
-include_directories(./include)
+include_directories(./src)
 include_directories(./3rdparty)
 
 add_executable(camera_test 
     src/camera_test.cpp 
-    src/image/CameraInput.cpp
+    src/image/MVCameraInput.cpp
 )
 
 if(WIN32)

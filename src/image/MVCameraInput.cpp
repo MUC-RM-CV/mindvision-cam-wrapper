@@ -1,4 +1,4 @@
-#include "image/CameraInput.h"
+#include "MVCameraInput.h"
 
 MVCameraInput::MVCameraInput()
 {

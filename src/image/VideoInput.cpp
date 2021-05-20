@@ -1,4 +1,4 @@
-#include "image/VideoInput.h"
+#include "VideoInput.h"
 
 VideoInput::VideoInput()
 {
