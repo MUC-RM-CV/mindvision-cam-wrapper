@@ -3,7 +3,7 @@
 
 #include "ImageInput.h"
 
-#include "MVSDK/include/CameraApi.h"
+#include "CameraApi.h"
 
 #include <iostream>
 #include <string>

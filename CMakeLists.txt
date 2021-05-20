@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(OpenCV REQUIRED)
 
 include_directories(./src)
-include_directories(./3rdparty)
+include_directories(./3rdparty/MVSDK/include)
 
 add_executable(camera_test 
     src/demo/camera_test.cpp 
