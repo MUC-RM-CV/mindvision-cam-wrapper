@@ -24,6 +24,11 @@ int main() {
     cv::String windowTitle = "Mindvision Camera";
     cv::namedWindow(windowTitle);
 
+    std::cout << frame.size();
+
+    const int process_width = 640;
+    cam.setResolution(cv::Size(process_width, (double)process_width / frame.cols * frame.rows));
+
     while(true) {
         cam >> frame;
         if (!frame.empty()) {

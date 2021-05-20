@@ -17,27 +17,27 @@ add_executable(camera_test
     src/MVCameraInput.cpp
 )
 
-# add_executable(windmill 
-#     src/windmill.cpp 
-#     src/image/MVCameraInput.cpp
-# )
+add_executable(camera_calib 
+    src/demo/camera_calib.cpp 
+    src/MVCameraInput.cpp
+)
 
 if(WIN32)
     target_link_libraries(camera_test 
         ${OpenCV_LIBS} 
         ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
     )
-    # target_link_libraries(windmill 
-    #     ${OpenCV_LIBS} 
-    #     ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
-    # )
+    target_link_libraries(camera_calib 
+        ${OpenCV_LIBS} 
+        ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
+    )
 elseif(UNIX)
     target_link_libraries(camera_test 
         ${OpenCV_LIBS} 
         MVSDK
     )
-    # target_link_libraries(windmill 
-    #     ${OpenCV_LIBS} 
-    #     MVSDK
-    # )
+    target_link_libraries(camera_calib 
+        ${OpenCV_LIBS} 
+        MVSDK
+    )
 endif()
