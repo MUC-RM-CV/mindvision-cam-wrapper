@@ -10,7 +10,7 @@
 
 ### 安装时注意事项：
 
-- 最新的 Linux SDK 的`install.sh`中已经做了判断，但是Linux 平台安装时还是要注意复制的动态库`.so`文件是否为对应平台的架构；
+- 最新的 Linux SDK 的 `install.sh` 中已经做了判断，但是 Linux 平台安装时还是要注意复制的动态库 `.so` 文件是否为对应平台的架构；
 
 ## 🔧 使用 SDK
 
@@ -24,14 +24,14 @@
 
 再次提醒：首先要确保安装了 Mindvision 的 SDK
 
-- Linux 平台的`install.sh`会将标头文件复制到`/usr/include`目录（同时也会将动态链接库复制到系统库目录），因此在**SDK安装完成后**，如果需要调用 Mindvision 的 SDK，可以直接引用`CameraApi.h`等文件
+- Linux 平台的 `install.sh` 会将标头文件复制到 `/usr/include` 目录（同时也会将动态链接库复制到系统库目录），因此在**SDK 安装完成后**，如果需要调用 Mindvision 的 SDK，可以直接引用`CameraApi.h`等文件
 - 然而 Windows 平台暂时不清楚是否会将标头文件复制到系统包含路径下，并且考虑到 Windows 上工具链的的复杂性，建议还是将标头文件拷贝一份放在工程目录下
-- 对于该项目，将 Mindvision SDK 的标头文件放在项目根目录的[3rdparty/MVSDK/include](3rdparty/MVSDK/include)下
+- 对于该项目，将 Mindvision SDK 的标头文件放在项目根目录的 [3rdparty/MVSDK](3rdparty/MVSDK) 下的 `include` 目录中。
 - 另外，虽然库文件已经放置在了系统目录中，但是 Windows 下链接时 CMake 似乎并不能直接找到对应的 `dll` 文件，因此需要链接 `.lib` 文件，这样能够通过链接，而生成的可执行文件会在运行时动态加载、并在系统目录（`Windows/system32`）找到需要的 `dll` 文件
 
 其他问题：
 
-- Windows SDK 安装后，Mindvision 的工业摄像头似乎可以直接作为 USB Camera 使用（未验证），也就是说，使用`cv::VideoCapture`即可调用工业摄像头；但是Linux下貌似不能成功
+- Windows SDK 安装后，Mindvision 的工业摄像头似乎可以直接作为 USB Camera 使用（未验证），也就是说，使用 `cv::VideoCapture` 即可调用工业摄像头；但是 Linux 下貌似不能成功
 
 - 在 Windows (x86_64) 上，似乎需要调用 MVSDK 中的 `CameraFlipFrameBuffer` 来对获取的图像进行垂直反转操作，但是在 Linux for Tegra (L4T) (aarch64) 上则似乎不需要进行翻转操作；
 - 如果没有调用`CameraSetIspOutFormat`，则可能会遇到色彩错乱的问题
