@@ -17,10 +17,9 @@ public:
     virtual cv::Mat     read() = 0;
 
     ImageInput&         operator>>(cv::Mat& image)  { image = this->read(); return *this; }
-    bool                isOpened()                  { return opened; }
+    bool                isOpened() const            { return opened; }
     operator            bool()                      { return opened; }
 
-    void setResolution(int width, int height) { imgResolution = cv::Size(width, height); }
     void setResolution(const cv::Size & _res) { imgResolution = _res; }
     auto getResolution() { return imgResolution; }
 };
