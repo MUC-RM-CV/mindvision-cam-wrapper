@@ -89,8 +89,6 @@ cv::Mat MVCameraInput::read()
     BYTE*                   pbyBuffer;         //输出图像数据的缓冲区地址
     CameraSdkStatus         status;
 
-    double t = cv::getTickCount();
-
     cv::Mat matImg;
 
     // 第四个参数为超时时间，单位为ms
@@ -111,19 +109,17 @@ cv::Mat MVCameraInput::read()
                 g_pRgbBuffer
             );
 
-            double resize_time = cv::getTickCount();
+            auto begin_timestamp = cv::getTickCount();
 
             cv::resize(matImg, matImg, this->imgResolution);
 
-            resize_time = ((double)cv::getTickCount() - resize_time) / cv::getTickFrequency();
+            auto elapsed_seconds = (cv::getTickCount() - begin_timestamp) / cv::getTickFrequency();
         }
 
         //在成功调用CameraGetImageBuffer后，必须调用CameraReleaseImageBuffer来释放获得的buffer。
         //否则再次调用CameraGetImageBuffer时，程序将被挂起一直阻塞，直到其他线程中调用CameraReleaseImageBuffer来释放了buffer
         CameraReleaseImageBuffer(hCamera, pbyBuffer);
     }
-
-    t = ((float)cv::getTickCount() - t) / cv::getTickFrequency();
     
     return matImg;
 }
