@@ -3,4 +3,5 @@ include/*.h
 include/*.hpp
 
 # MVSDK: libs
-/lib/
+lib/*.dll
+lib/*.lib
