@@ -35,6 +35,7 @@
 - 然而 Windows 平台暂时不清楚是否会将标头文件复制到系统包含路径下，建议还是将标头文件拷贝一份放在工程目录下；就常用的接口来说，使用 Linux SDK 的头文件也能访问 Windows SDK 中的功能；出于兼容性考虑，建议使用 Linux SDK 的标头文件
 - 对于该项目，将 Mindvision SDK 的标头文件放在 [`${PROJECT_ROOT}/3rdparty/MVSDK/include/`](3rdparty/MVSDK/include) 目录下。
 - 另外，虽然库文件已经放置在了系统目录（`X:/Windows/System32/`）中，但是 MSVC 在链接时需要链接动态链接库文件对应的 `.lib` 文件，因此需要将 `.lib` 文件放入 [`${PROJECT_ROOT}/3rdparty/MVSDK/lib/`](3rdparty/MVSDK/lib) 下，详见 [`CMakeLists.txt`](./CMakeLists.txt)。
+- 目前机器通常为 `x86_64`（`amd64`）架构，推荐使用 64 位的链接库，即链接到 `MVCAMSDK_X64.lib`（复制到 `System32` 的也是对应的 `MVCAMSDK_X64.dll`；此外，迈德威视提供的 32 位的库文件似乎有问题）。
 
 ### 不同平台 SDK 差别
 
@@ -51,6 +52,7 @@
 
 | Passed | Platform                         | Toolchain                                       |
 | :----: | -------------------------------- | ----------------------------------------------- |
-|   ✔️    | Windows (x86_64)                 | MSYS2 MinGW64 gcc-10.2.0 + OpenCV 4.5.1 + CMake |
+|   ✔️    | Windows (x86_64)                 | MSYS2 MinGW-w64 gcc-10.2.0 + OpenCV 4.5.1 + CMake |
+|   ✔️    | Windows (x86_64)                 | MSVC 19.30.30528.0 (amd64) + OpenCV 4.5.3 + CMake |
 |   ✔️    | Linux for Tegra (L4T)  (aarch64) | gcc-7 + NVIDIA-OpenCV + CMake                   |
 
