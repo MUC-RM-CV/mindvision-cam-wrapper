@@ -4,3 +4,9 @@ out/
 
 *.exe
 *.o
+
+# MVSDK: Headers
+3rdparty/MVSDK/include/
+
+# MVSDK: libs
+3rdparty/MVSDK/lib/
