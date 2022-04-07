@@ -1,6 +1,6 @@
 #include "VideoInput.h"
 
-VideoInput::VideoInput()
+VideoInput::VideoInput(int idx) : cam_no(idx)
 {
     opened = init();
 }
@@ -31,7 +31,7 @@ VideoInput::~VideoInput()
 bool VideoInput::initUSBCamera()
 {
     std::cout << "Try using USB camera. " << std::endl;
-    origin.open(0);
+    origin.open(this->cam_no);
     if (origin.isOpened()) {
         std::cout << "USB Camera opened successfully. " << std::endl;
         return true;
@@ -45,6 +45,6 @@ bool VideoInput::initUSBCamera()
 cv::Mat VideoInput::read()
 {
     origin >> tmp;
-    cv::resize(tmp, tmp, imgResolution);
+    if (!tmp.empty()) cv::resize(tmp, tmp, imgResolution);
     return tmp;
 }

@@ -10,10 +10,12 @@ class VideoInput : public ImageInput {
 private:
     cv::Mat tmp;
     cv::VideoCapture origin;
+    int cam_no = 0;
+
     bool initUSBCamera();
 
 public:
-    VideoInput();
+    VideoInput(int idx = 0);
     VideoInput(const std::string & fileName);
     ~VideoInput();
     bool    init() final;
