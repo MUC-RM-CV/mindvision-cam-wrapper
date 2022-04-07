@@ -9,14 +9,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenCV REQUIRED)
 
-# Image-Input Library
+# Image-Input Library Target
+add_library(img_input OBJECT src/MVCameraInput.cpp src/VideoInput.cpp)
 
-add_library(image OBJECT src/MVCameraInput.cpp src/VideoInput.cpp)
-target_include_directories(image PUBLIC src ./3rdparty/MVSDK/include)
+# Image-Input Library Target Include
+target_include_directories(img_input PUBLIC src ./3rdparty/MVSDK/include)
 
+# Image-Input Library Target Link Libraries
 if(WIN32)
     target_link_libraries(
-        image
+        img_input
         ${OpenCV_LIBS}
         ${PROJECT_SOURCE_DIR}/3rdparty/MVSDK/lib/MVCAMSDK_X64.lib
     )
